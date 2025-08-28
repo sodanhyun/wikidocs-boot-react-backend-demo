@@ -1,4 +1,4 @@
-package com.packt.cardatabase;
+package com.packt.cardatabase.auth;
 
 import java.io.IOException;
 import java.io.PrintWriter;

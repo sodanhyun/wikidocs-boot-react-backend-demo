@@ -1,4 +1,4 @@
-package com.packt.cardatabase.service;
+package com.packt.cardatabase.auth;
 
 import org.springframework.stereotype.Component;
 import io.jsonwebtoken.Jwts;

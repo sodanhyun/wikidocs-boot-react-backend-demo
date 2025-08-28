@@ -1,4 +1,4 @@
-package com.packt.cardatabase.web;
+package com.packt.cardatabase.controller;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
@@ -8,8 +8,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
-import com.packt.cardatabase.domain.AccountCredentials;
-import com.packt.cardatabase.service.JwtService;
+import com.packt.cardatabase.dto.AccountCredentials;
+import com.packt.cardatabase.auth.JwtService;
 
 @RestController
 public class LoginController {
@@ -23,8 +23,8 @@ public class LoginController {
 
 	@PostMapping("/login")
 	public ResponseEntity<?> getToken(@RequestBody AccountCredentials credentials) {
-		UsernamePasswordAuthenticationToken creds = new UsernamePasswordAuthenticationToken(credentials.username(),
-				credentials.password());
+		UsernamePasswordAuthenticationToken creds = new UsernamePasswordAuthenticationToken(credentials.getUsername(),
+				credentials.getPassword());
 		Authentication auth = authenticationManager.authenticate(creds);
 		// Generate token
 		String jwts = jwtService.getToken(auth.getName());

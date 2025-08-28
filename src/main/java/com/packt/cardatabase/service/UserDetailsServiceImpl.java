@@ -1,21 +1,20 @@
 package com.packt.cardatabase.service;
 
 import java.util.Optional;
+
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.User.UserBuilder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import com.packt.cardatabase.domain.AppUser;
-import com.packt.cardatabase.domain.AppUserRepository;
+import com.packt.cardatabase.domain.repository.AppUserRepository;
 
 @Service
+@RequiredArgsConstructor
 public class UserDetailsServiceImpl implements UserDetailsService {
 	private final AppUserRepository repository;
-
-	public UserDetailsServiceImpl(AppUserRepository repository) {
-		this.repository = repository;
-	}
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {

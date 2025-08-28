@@ -9,11 +9,11 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.packt.cardatabase.domain.AppUser;
-import com.packt.cardatabase.domain.AppUserRepository;
+import com.packt.cardatabase.domain.repository.AppUserRepository;
 import com.packt.cardatabase.domain.Car;
-import com.packt.cardatabase.domain.CarRepository;
+import com.packt.cardatabase.domain.repository.CarRepository;
 import com.packt.cardatabase.domain.Owner;
-import com.packt.cardatabase.domain.OwnerRepository;
+import com.packt.cardatabase.domain.repository.OwnerRepository;
 
 @SpringBootApplication
 public class CardatabaseApplication implements CommandLineRunner {
@@ -36,19 +36,59 @@ public class CardatabaseApplication implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		// Add owner objects and save these to db
-		Owner owner1 = new Owner("John", "Johnson");
-		Owner owner2 = new Owner("Mary", "Robinson");
+		Owner owner1 = Owner.builder()
+                .firstname("John")
+                .lastname("Johnson")
+                .build();
+		Owner owner2 = Owner.builder()
+                .firstname("Mary")
+                .lastname("Robinson")
+                .build();
 		orepository.saveAll(Arrays.asList(owner1, owner2));
 
-		repository.save(new Car("Ford", "Mustang", "Red", "ADF-1121", 2023, 59000, owner1));
-		repository.save(new Car("Nissan", "Leaf", "White", "SSJ-3002", 2020, 29000, owner2));
-		repository.save(new Car("Toyota", "Prius", "Silver", "KKO-0212", 2022, 39000, owner2));
+        repository.save(Car.builder()
+                .brand("Ford")
+                .model("Mustang")
+                .color("Red")
+                .registrationNumber("ADF-1121")
+                .modelYear(2023)
+                .price(59000)
+                .owner(owner1)
+                .build());
 
+        repository.save(Car.builder()
+                .brand("Nissan")
+                .model("Leaf")
+                .color("White")
+                .registrationNumber("SSJ-3002")
+                .modelYear(2020)
+                .price(29000)
+                .owner(owner2)
+                .build());
+
+        repository.save(Car.builder()
+                .brand("Toyota")
+                .model("Prius")
+                .color("Silver")
+                .registrationNumber("KKO-0212")
+                .modelYear(2022)
+                .price(39000)
+                .owner(owner2)
+                .build());
 		// Username: user, password: user
-		urepository.save(new AppUser("user", "$2a$10$NVM0n8ElaRgg7zWO1CxUdei7vWoPg91Lz2aYavh9.f9q0e4bRadue", "USER"));
+		urepository.save(AppUser.builder()
+                .username("user")
+                .password("user")
+                .role("USER")
+                .build()
+        );
 		// Username: admin, password: admin
-		urepository.save(new AppUser("admin","$2a$10$8cjz47bjbR4Mn8GMg9IZx.vyjhLXR/SKKMSZ9.mP9vpMu0ssKi8GW", "ADMIN"));
-		
+        urepository.save(AppUser.builder()
+                .username("admin")
+                .password("admin")
+                .role("ADMIN")
+                .build()
+        );
 		// Fetch all cars and log to console
 		for (Car car : repository.findAll()) {
 			logger.info("brand: {}, model: {}", car.getBrand(), car.getModel());
