@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/wikidocs-boot-react-backend-demo.iml" filepath="$PROJECT_DIR$/.idea/wikidocs-boot-react-backend-demo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/carbackend.main.iml" filepath="$PROJECT_DIR$/.idea/modules/carbackend.main.iml" />
     </modules>
   </component>
 </project>
