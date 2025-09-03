@@ -1,5 +1,4 @@
 spring:
-  profiles: prod
   application:
     name: carbackend
   datasource:
@@ -11,3 +10,6 @@ spring:
     show-sql: true
     hibernate:
       ddl-auto: create
+  config:
+    activate:
+      on-profile: prod
