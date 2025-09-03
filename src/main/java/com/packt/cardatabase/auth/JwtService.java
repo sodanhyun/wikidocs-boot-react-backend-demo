@@ -22,8 +22,11 @@ public class JwtService {
 
 	// Generate signed JWT token
 	public String getToken(String username) {
-		String token = Jwts.builder().setSubject(username)
-				.setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME)).signWith(key).compact();
+		String token = Jwts.builder()
+				.setSubject(username)
+				.setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME))
+				.signWith(key)
+				.compact();
 		return token;
 	}
 
@@ -32,8 +35,12 @@ public class JwtService {
 	public String getAuthUser(HttpServletRequest request) {
 		String token = request.getHeader(HttpHeaders.AUTHORIZATION);
 		if (token != null) {
-			String user = Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token.replace(PREFIX, ""))
-					.getBody().getSubject();
+			String user = Jwts.parserBuilder()
+				.setSigningKey(key)
+				.build()
+				.parseClaimsJws(token.replace(PREFIX, ""))
+				.getBody()
+				.getSubject();
 			if (user != null)
 				return user;
 		}

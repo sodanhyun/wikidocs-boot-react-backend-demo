@@ -76,7 +76,7 @@ public class CardatabaseApplication implements CommandLineRunner {
                 .owner(owner2)
                 .build());
 		// Username: user, password: user
-		urepository.save(AppUser.builder()
+        urepository.save(AppUser.builder()
                 .username("user")
                 .password("user")
                 .role("USER")
