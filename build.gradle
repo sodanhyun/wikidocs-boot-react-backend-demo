@@ -46,6 +46,10 @@ springBoot {
     mainClass = 'com.carbackend.CarbackendApplication'
 }
 
+bootJar {
+    archiveFileName = 'app.jar'
+}
+
 tasks.named('test') {
     useJUnitPlatform()
 }
